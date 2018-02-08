@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2012-2017, Sebastian Staudt
+# Copyright (c) 2012-2018, Sebastian Staudt
 
 class Formula
 
@@ -29,10 +29,7 @@ class Formula
   has_and_belongs_to_many :revisions, inverse_of: nil, validate: false,
                                       index: true
 
-  has_and_belongs_to_many :deps, class_name: to_s, inverse_of: :revdeps,
-                                 validate: false, index: true
-  has_and_belongs_to_many :revdeps, class_name: to_s, inverse_of: :deps,
-                                    validate: false, index: true
+  embeds_many :deps, class_name: Dependency.to_s, validate: false
 
   scope :letter, ->(letter) { where(name: /^#{letter}/) }
 
@@ -66,6 +63,21 @@ class Formula
     repository.generate_formula_history self
   end
 
+  def update_dependencies(formula_info)
+    deps = formula_info['dependencies']
+    return if deps.empty?
+
+    build_deps = formula_info['build_dependencies']
+    optional_deps = formula_info['optional_dependencies']
+    recommended_deps = formula_info['recommended_dependencies']
+    runtime_deps = deps - optional_deps - recommended_deps - build_deps
+
+    self.deps = build_deps.map { |dep| Dependency.build dep }
+    self.deps += optional_deps.map { |dep| Dependency.optional dep }
+    self.deps += recommended_deps.map { |dep| Dependency.recommended dep }
+    self.deps += runtime_deps.map { |dep| Dependency.runtime dep }
+  end
+
   def update_metadata(formula_info)
     self.description = formula_info['desc']
     self.homepage = formula_info['homepage']
@@ -75,9 +87,7 @@ class Formula
     self.head_version = formula_info['versions']['head']
     self.revision = formula_info['revision']
 
-    self.deps = formula_info['dependencies'].map do |dep|
-      repository.formulae.find_by(name: dep) || Repository.core.formulae.find_by(name: dep)
-    end
+    update_dependencies formula_info
   end
 
   def version

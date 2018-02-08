@@ -132,7 +132,7 @@ div#content {
   }
 }
 
-div#deps, div#revdeps {
+div#deps {
   margin-top: 1.5em;
 
   h2 {
@@ -318,10 +318,16 @@ div.listing.browse {
   padding: 0 0.5em;
 }
 
-#deps, #revdeps {
+#deps {
   td {
     vertical-align: baseline;
     padding-right: 0.5em;
+
+    &:first-child {
+      cursor: default;
+      font-size: 15pt;
+      text-align: center;
+    }
  }
 }
 

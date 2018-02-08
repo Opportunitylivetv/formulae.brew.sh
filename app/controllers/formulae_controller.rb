@@ -68,7 +68,7 @@ class FormulaeController < ApplicationController
   end
 
   def show
-    @formulae = formulae.includes(:deps, :revdeps).where(name: params[:id]).to_a
+    @formulae = formulae.where(name: params[:id]).to_a
     if @formulae.empty?
       formula = formulae.all_in(aliases: [params[:id]]).first
       unless formula.nil?

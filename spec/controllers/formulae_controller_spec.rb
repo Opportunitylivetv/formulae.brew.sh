@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2012-2017, Sebastian Staudt
+# Copyright (c) 2012-2018, Sebastian Staudt
 
 require 'rails_helper'
 
@@ -58,7 +58,7 @@ describe FormulaeController do
       before do
         formulae = mock
         formulae.expects(:all_in).returns []
-        formulae.expects(:includes).returns mock(where: [])
+        formulae.expects(:where).returns []
         repo = mock
         repo.expects(:formulae).twice.returns formulae
 

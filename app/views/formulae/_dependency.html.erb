@@ -1,0 +1,11 @@
+<tr class="formula <%= cycle 'even', 'odd' %><%= ' removed' if dependency.formula.removed? %>">
+  <td title="<%= t "dep_type_description.#{dependency.type}", scope: 'formulae.show' %>"><%= t "dep_type.#{dependency.type}", scope: 'formulae.show' %></td>
+  <td><%= formula_link dependency.formula %></td>
+  <td><span class="spec-<%= dependency.formula.best_spec %>"></td>
+  <td>
+    <strong class="version">
+      <%= dependency.formula.version %><%= "_#{dependency.formula.revision}" if dependency.formula.revision > 0 %>
+    </strong>
+  </td>
+  <td class="desc"><%= dependency.formula.description %></td>
+</tr>

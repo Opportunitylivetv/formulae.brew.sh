@@ -52,26 +52,13 @@
     <% end %>
   </div>
 
-  <% deps = @formula.deps.reject { |formula| formula.removed? } %>
+  <% deps = @formula.deps.order_by(:type.asc).reject { |dep| dep.formula.removed? } %>
   <% unless deps.empty? %>
     <div id="deps">
-      <%= t '.deps_html', name: @formula.name, count: @formula.deps.size %>
+      <%= t '.deps', name: @formula.name, count: @formula.deps.size %>
 
       <table>
-        <%= render partial: 'formula', collection: deps %>
-      </table>
-    </div>
-  <% end %>
-
-  <% reset_cycle %>
-
-  <% revdeps = @formula.revdeps.reject { |formula| formula.removed? } %>
-  <% unless revdeps.empty? %>
-    <div id="revdeps">
-      <h2>Reverse dependencies</h2>
-      <%= t '.revdeps_html', name: @formula.name, count: @formula.revdeps.size %>
-      <table>
-        <%= render partial: 'formula', collection: revdeps %>
+        <%= render partial: 'dependency', collection: deps %>
       </table>
     </div>
   <% end %>

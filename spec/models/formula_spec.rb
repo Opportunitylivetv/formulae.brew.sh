@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2012-2017, Sebastian Staudt
+# Copyright (c) 2012-2018, Sebastian Staudt
 
 require 'rails_helper'
 
@@ -35,7 +35,10 @@ describe Formula do
     it 'updates the metadata of the formula' do
       formula_info = {
         'desc' => 'Example description',
-        'dependencies' => [ 'dep1', 'dep2' ],
+        'build_dependencies' => %w[dep1],
+        'optional_dependencies' => %w[dep4],
+        'recommended_dependencies' => %w[dep2],
+        'dependencies' => %w[dep1 dep2 dep3 dep4],
         'homepage' => 'http://example.com',
         'keg_only' => true,
         'versions' => {
@@ -45,10 +48,15 @@ describe Formula do
         }
       }
       dep1 = mock
-      formula.repository.formulae.stubs(:find_by).with(name: 'dep1').returns dep1
+      Dependency.stubs(:build).returns dep1
       dep2 = mock
-      formula.repository.formulae.stubs(:find_by).with(name: 'dep2').returns dep2
-      formula.expects(:deps=).with [ dep1, dep2]
+      Dependency.stubs(:recommended).returns dep2
+      dep3 = mock
+      Dependency.stubs(:runtime).returns dep3
+      dep4 = mock
+      Dependency.stubs(:optional).returns dep4
+      formula.stubs(:deps=)
+      formula.deps.stubs(:+)
 
       formula.update_metadata formula_info
 

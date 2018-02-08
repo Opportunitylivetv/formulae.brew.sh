@@ -1,19 +1,26 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2012-2017, Sebastian Staudt
+# Copyright (c) 2012-2018, Sebastian Staudt
 
 en:
   formulae:
     browse:
       feed_title: "Stay up-to-date – subscribe to %{name}'s feed."
     show:
-      deps_html:
-        one:   "%{name} requires the following formula to be installed:"
-        other: "%{name} requires the following formulae to be installed:"
-      revdeps_html:
-        one:   "The following formula requires %{name} to be installed:"
-        other: "The following formulae require %{name} to be installed:"
+      deps:
+        one:   "%{name} depends on the following formula:"
+        other: "%{name} depends on the following formulae:"
+      dep_type:
+        build: "🔨"
+        runtime: "🚗"
+        recommended: "⭐️"
+        optional: "👌"
+      dep_type_description:
+        build: "This is a build dependency."
+        runtime: "This is a runtime dependency."
+        recommended: "This is a recommended ependency."
+        optional: "This is an optional dependency."
       versions:
         one:   "Current version"
         other: "Current versions"
