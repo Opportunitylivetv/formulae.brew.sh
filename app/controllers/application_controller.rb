@@ -21,20 +21,10 @@ class ApplicationController < ActionController::Base
   def index
     main_page
 
-    respond_to do |format|
-      format.html { render 'application/index' }
-      format.any { render nothing: true, status: :not_found }
-    end
-
     fresh_when etag: Repository.core.sha, public: true
   end
 
   def status
-    respond_to do |format|
-      format.html { render 'application/status' }
-      format.any { render nothing: true, status: :not_found }
-    end
-
     fresh_when etag: Repository.core.sha, public: true
   end
 
