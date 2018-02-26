@@ -3,6 +3,7 @@ formulae.brew.sh
 
 [![Build Status](https://secure.travis-ci.org/Homebrew/formulae.brew.sh.svg)](http://travis-ci.org/Homebrew/formulae.brew.sh)
 [![Dependency Status](https://gemnasium.com/Homebrew/formulae.brew.sh.svg)](https://gemnasium.com/Homebrew/formulae.brew.sh)
+[![View Performance Data on Skylight](https://badges.skylight.io/status/jut3BrkJo722.svg)](https://oss.skylight.io/app/applications/jut3BrkJo722)
 [![Code Climate](https://codeclimate.com/github/Homebrew/formulae.brew.sh/badges/gpa.svg)](https://codeclimate.com/github/Homebrew/formulae.brew.sh)
 [![Test Coverage](https://codeclimate.com/github/Homebrew/formulae.brew.sh/badges/coverage.svg)](https://codeclimate.com/github/Homebrew/formulae.brew.sh/coverage)
 
@@ -76,6 +77,7 @@ LICENSE file.
  * [GitHub issue tracker][2]
  * [Homebrew][3]
  * [Continuous Integration at Travis CI][5]
+ * [Performance Data at Skylight][6]
  * [Dependency status at Gemnasium][4]
 
 Follow formulae.brew.sh on Twitter
@@ -86,3 +88,4 @@ Follow formulae.brew.sh on Twitter
  [3]: https://brew.sh
  [4]: https://gemnasium.com/Homebrew/formulae.brew.sh
  [5]: https://travis-ci.org/Homebrew/formulae.brew.sh
+ [6]: https://oss.skylight.io/app/applications/jut3BrkJo722
